@@ -1,0 +1,5 @@
+node_modules/
+foundry
+dist
+packs
+!packs/_source

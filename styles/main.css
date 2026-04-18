@@ -1,0 +1,40 @@
+.colossus-bane {
+  &.sheet {
+    .segments-section {
+      overflow-y: auto;
+      scrollbar-color: light-dark(#18162e, #f3c267) transparent;
+      display: flex;
+      align-items: stretch;
+
+      .segments-list {
+        margin-inline: -0.75em;
+        width: auto;
+        .segment {
+          padding-inline: 0.75em;
+          &:hover {
+            background: rgba(255, 2255, 255, 0.05);
+          }
+        }
+      }
+      .item-tags {
+        margin-top: 5px;
+      }
+      .controls {
+        gap: 5px;
+      }
+      .uuid-input-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+        button {
+          flex: 0 0 auto;
+        } 
+      }
+      
+    }
+    .drag-area {
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "TYPES": {
+    "Actor": {
+      "colossus-bane.colossus": "Colossus"
+    }
+  },
+  "COLOSSUS_BANE": {
+    "SETTINGS": {
+      "autoLinkTokens": {
+        "name": "Auto-link Synthetic Actors",
+        "hint": "When enabled, new tokens placed on the canvas will automatically connect to their matching Colossus token actor."
+      }
+    }
+  }
+}

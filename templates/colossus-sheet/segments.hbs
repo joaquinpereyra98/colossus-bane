@@ -1,0 +1,42 @@
+<section class='tab {{tabs.segments.cssClass}} {{tabs.segments.id}}' data-tab='{{tabs.segments.id}}'
+    data-group='{{tabs.segments.group}}'>
+    <fieldset class="flexcol segments-section">
+        <legend>Segments</legend>
+        <div class="uuid-input-group">
+            <button type="button" data-action="placeTokens" class="icon fa-solid fa-people-group" data-tooltip="Place Tokens"
+                aria-label="Place Tokens"></button>
+            <input type="text" class="uuid-input-text" placeholder="Enter UUID">
+            <button type="button" data-action="addSegmentByUuid" class="icon fa-solid fa-file-plus uuid-input-button" data-tooltip="Add Segment Actor"
+                aria-label="Add Segment Actor"></button>
+        </div>
+        <ul class="items-list segments-list">
+            {{#each segments as |segment|}}
+            <li class="inventory-item segment" data-item-id="{{segment.id}}" data-item-uuid="{{segment.uuid}}"
+                data-type="segment" draggable="true">
+                <div class="inventory-item-header">
+                    <div class="img-portait" data-action="editDoc" data-tooltip="#item#{{segment.uuid}}">
+                        <img src="{{segment.img}}" class="item-img actor-img">
+                    </div>
+                    <div class="item-label">
+                        <span class="item-name">
+                            {{segment.name}}
+                            {{#if segment.isToken}}
+                            <i class="fa-light fa-circle-t" data-tooltip="Token Actor"></i>
+                            {{/if}}
+                        </span>
+                    </div>
+
+                    <div class="controls">
+                        <a data-action="editDoc" data-tooltip="DAGGERHEART.UI.Tooltip.openActorWorld">
+                            <i class="fa-solid fa-globe"></i>
+                        </a>
+                        <a data-action="deleteSegment" data-tooltip="CONTROLS.CommonDelete">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+            </li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+</section>
