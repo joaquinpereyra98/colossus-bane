@@ -1,6 +1,6 @@
 import data from "./data/_module.mjs";
 import apps from "./apps/_module.mjs";
-import canvas from "./canvas/token-placement.mjs";
+import * as canvas from "./canvas/_module.mjs";
 import * as CONSTANTS from "./constants.mjs";
 
 /**
@@ -10,7 +10,7 @@ export default class ColossusBaneModule {
   /** @returns {Object} Default API structure with data classes. */
   static get DEFAULT_API() {
     return {
-      data: { ...data.classes },
+      data: { ...data },
       canvas,
     };
   }
@@ -33,19 +33,22 @@ export default class ColossusBaneModule {
     return (this.module.api ??= this.DEFAULT_API);
   }
 
-  /** Initializes all data models */
+  /**
+   * Initializes Document TypedDataModels
+   */
   static initDataModels() {
     const api = this.api;
-    for (const [docType, fn] of Object.entries(data.functions)) {
-      const cls = fn();
+    for (const [docType, cls] of Object.entries(data.classes)) {
       api.data[docType] = cls;
       CONFIG.Actor.dataModels[docType] = cls;
     }
 
     console.log(`${CONSTANTS.MODULE_ID} | DataModels initialized`);
   }
-  /** Initializes all applications */
 
+  /**
+   * Initializes all applications
+   */
   static initApplications() {
     const { DocumentSheetConfig } = foundry.applications.apps;
     for (const [documentName, sheets] of Object.entries(

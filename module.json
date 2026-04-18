@@ -4,8 +4,8 @@
   "description": "",
   "version": "#{VERSION}#",
   "compatibility": {
-    "minimun": "13",
-    "verified": "13"
+    "minimun": "14",
+    "verified": "14"
   },
   "authors": [
     {
@@ -21,7 +21,16 @@
   "readme": "README.md",
   "socket": true,
   "relationships": {
-    "requires": [],
+    "requires": [
+      {
+        "id": "daggerheart",
+        "type": "system",
+        "compatibility": {
+          "minimun": "2.0.2",
+          "verified": "2.1.2"
+        }
+      }
+    ],
     "recommends": []
   },
   "esmodules": ["main.mjs"],
@@ -41,7 +50,9 @@
   ],
   "documentTypes": {
     "Actor": {
-      "colossus": {}
+      "colossus": {
+        "htmlFields": ["notes", "description"]
+      }
     }
   }
 }

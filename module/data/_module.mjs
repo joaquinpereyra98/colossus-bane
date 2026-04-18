@@ -1,11 +1,12 @@
 import * as CONSTANTS from "../constants.mjs";
-import createColossusDataModel from "./colossus.mjs";
+import ColossusDataModel from "./colossus.mjs";
+
+const { Colossus } = CONSTANTS.DOCUMENT_TYPES.Actor;
 
 const config = {
-  functions: {
-    [CONSTANTS.DOCUMENT_TYPES.Actor.Colossus]: createColossusDataModel,
+  classes: {
+    [Colossus]: ColossusDataModel,
   },
-  classes: {},
 };
 
 export default config;

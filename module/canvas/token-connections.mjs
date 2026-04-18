@@ -10,7 +10,6 @@
  * Manages visual line connections between Tokens.
  */
 export default class TokenConnections {
-
   /** @type {Connection[]} */
   connections = [];
 
@@ -24,15 +23,15 @@ export default class TokenConnections {
     return this.#connectionContainer;
   }
 
-/**
- * @return {foundry.utils.Collection<string, foundry.canvas.placeables.Token>}
- */
+  /**
+   * @return {foundry.utils.Collection<string, foundry.canvas.placeables.Token>}
+   */
   get colossusTokens() {
     const entries = canvas.tokens.placeables
-    .filter((t) => t.actor.type === DOCUMENT_TYPES.Actor.Colossus)
-    .map((t) => [t.actor.id, t.actor]);
+      .filter((t) => t.actor.type === DOCUMENT_TYPES.Actor.Colossus)
+      .map((t) => [t.actor.id, t.actor]);
 
-    return new foundry.utils.Collection(entries)
+    return new foundry.utils.Collection(entries);
   }
 
   /** PIXI container holding all connection lines */
@@ -55,7 +54,6 @@ export default class TokenConnections {
     from = this._asToken(from);
     to = this._asToken(to);
 
-    // Remove any previous connection between the same tokens
     this.removeConnection(from, to);
 
     const line = new PIXI.Graphics();
@@ -75,7 +73,6 @@ export default class TokenConnections {
 
   /**
    * Remove an existing connection between two tokens.
-   *
    * @param {foundry.canvas.placeables.Token} from
    * @param {foundry.canvas.placeables.Token} to
    */
@@ -84,7 +81,7 @@ export default class TokenConnections {
     to = this._asToken(to);
 
     const index = this.connections.findIndex(
-      (c) => c.from === from && c.to === to
+      (c) => c.from === from && c.to === to,
     );
     if (index === -1) return;
 
@@ -95,23 +92,24 @@ export default class TokenConnections {
   /**
    * Draw a single connection line.
    * @param {Connection} connection
-   * @private
    */
   _drawConnection({ from, to, line }) {
     const A = from.center;
     const B = to.center;
 
+    const midX = (A.x + B.x) / 2;
+    const midY = (A.y + B.y) / 2 + 70;
+
     line.clear();
-    line.lineStyle(3, 0x00bbff, 1);
+    line.lineStyle(4, 0x00bbff, 1);
     line.moveTo(A.x, A.y);
-    line.lineTo(B.x, B.y);
+    line.quadraticCurveTo(midX, midY, B.x, B.y);
   }
 
   /**
-   * Normalize TokenDocument → Token object.
+   * Get Token object.
    * @param {foundry.canvas.placeables.Token|foundry.documents.TokenDocument} t
    * @returns {foundry.canvas.placeables.Token}
-   * @private
    */
   _asToken(t) {
     return t instanceof foundry.documents.TokenDocument ? t.object : t;
