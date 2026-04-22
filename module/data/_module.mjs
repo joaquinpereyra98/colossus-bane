@@ -3,10 +3,8 @@ import ColossusDataModel from "./colossus.mjs";
 
 const { Colossus } = CONSTANTS.DOCUMENT_TYPES.Actor;
 
-const config = {
-  classes: {
+export default {
+  Actor: {
     [Colossus]: ColossusDataModel,
   },
 };
-
-export default config;

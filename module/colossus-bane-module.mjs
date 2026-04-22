@@ -11,7 +11,7 @@ export default class ColossusBaneModule {
   static get DEFAULT_API() {
     return {
       data: { ...data },
-      canvas,
+      canvas: { ...canvas },
     };
   }
 
@@ -37,10 +37,8 @@ export default class ColossusBaneModule {
    * Initializes Document TypedDataModels
    */
   static initDataModels() {
-    const api = this.api;
-    for (const [docType, cls] of Object.entries(data.classes)) {
-      api.data[docType] = cls;
-      CONFIG.Actor.dataModels[docType] = cls;
+    for (const [documentName, config] of Object.entries(data)) {
+      Object.assign(CONFIG[documentName].dataModels, config);
     }
 
     console.log(`${CONSTANTS.MODULE_ID} | DataModels initialized`);
@@ -52,7 +50,7 @@ export default class ColossusBaneModule {
   static initApplications() {
     const { DocumentSheetConfig } = foundry.applications.apps;
     for (const [documentName, sheets] of Object.entries(
-      apps.functions.sheets
+      apps.functions.sheets,
     )) {
       const cls = foundry.utils.getDocumentClass(documentName);
       for (const [type, fn] of Object.entries(sheets)) {
